@@ -1,5 +1,9 @@
 # Secret Krampus
 
+## What's happening?
+
+Go checkout `https://dev.to/nexxeln/build-a-full-stack-app-with-create-t3-app-5e1e`
+
 ## How to run locally (using sqlite)
 
 `cp .env.test .env`
