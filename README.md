@@ -4,6 +4,8 @@
 
 Go checkout `https://dev.to/nexxeln/build-a-full-stack-app-with-create-t3-app-5e1e`
 
+And `https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html`
+
 ## How to run locally (using sqlite)
 
 `cp .env.test .env`
