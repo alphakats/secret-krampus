@@ -1,0 +1,14 @@
+import { z } from "zod";
+
+import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
+
+export const drawRouter = createTRPCRouter({
+  getDraw: publicProcedure
+    // Input validation
+    .input(z.object({
+      groupId: z.string()
+    }))
+    .query(({ ctx, input }) => {
+      return ctx.prisma.example.findUnique(input);
+    }),
+});
