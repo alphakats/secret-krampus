@@ -1,6 +1,14 @@
 # Secret Krampus
 
-## How to run locally
+## How to run locally (using sqlite)
+
+`cp .env.test .env`
+
+`npm install`
+
+`npx prisma db push`
+
+`npm run dev`
 
 TODO
 
