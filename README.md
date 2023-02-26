@@ -46,3 +46,10 @@ You can check out the [create-t3-app GitHub repository](https://github.com/t3-os
 ## How do I deploy this?
 
 Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+
+## How to work with SASS (experimental)
+
+Please see [link](https://medium.com/@dandobusiness/adding-sass-scss-to-your-react-typescript-project-162de416b19a)
+
+Add sass file and run `npm run build:css` or `npm run watch:css`
+
