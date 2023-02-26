@@ -16,7 +16,13 @@ And `https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html`
 
 `npm run dev`
 
-TODO
+## How to run unit tests (using Jest)
+
+`npm test`
+
+To test a new component, please add a test file with the following format. Location is irrelevent as Jest looks through the whole codebase.
+
+`touch asdf.test.ts`
 
 ## T3 boilerplace Info
 
