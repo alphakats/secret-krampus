@@ -6,9 +6,10 @@ export const drawRouter = createTRPCRouter({
   getDraw: publicProcedure
     // Input validation
     .input(z.object({
-      groupId: z.string()
+      passphrase: z.string()
     }))
     .query(({ ctx, input }) => {
-      return ctx.prisma.example.findUnique(input);
+      //return ctx.prisma.example.findUnique(input);
+      return { name: 'Emma' };
     }),
 });
