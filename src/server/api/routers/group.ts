@@ -26,10 +26,10 @@ export const groupRouter = createTRPCRouter({
     .query(({ ctx, input }) => {
       //return ctx.prisma.example.findUnique(input);
       return { group: [
-        { passphrase: 'sara-loves-christmas', name: 'Emma'},
-        { passphrase: 'emma-loves-christmas', name: 'Gina'},
-        { passphrase: 'gina-loves-christmas', name: 'Sadie'},
-        { passphrase: 'sadie-loves-christmas', name: 'Sara'},
+        { passphrase: 'sara-loves-christmas', giver: 'Emma'},
+        { passphrase: 'emma-loves-christmas', giver: 'Gina'},
+        { passphrase: 'gina-loves-christmas', giver: 'Sadie'},
+        { passphrase: 'sadie-loves-christmas', giver: 'Sara'},
       ]}
     }),
 });
