@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export default function ParticipantsForm() {
+export default function ParticipantsForm({post}) {
     const nameCount = 4; // default number of name fields
     const [inputFields, setInputFields] = useState(
         Array(nameCount).fill().map((_, i) => ({index: i, name: ''}))
@@ -19,7 +19,8 @@ export default function ParticipantsForm() {
     
     const submit = (e) => {
         e.preventDefault(); // prevents page refresh
-        console.log(inputFields)
+        console.log(inputFields);
+        post(inputFields.map(({index, name}) => name))
     }
 
     return (
