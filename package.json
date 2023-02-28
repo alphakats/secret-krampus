@@ -7,6 +7,10 @@
     "dev": "next dev",
     "postinstall": "prisma generate",
     "lint": "next lint",
+    "db:migrate": "npx prisma migrate dev",
+    "db:setup": "npx prisma migrate dev",
+    "db:reset": "npx prisma migrate reset",
+    "db:deploy": "prisma migrate deploy",
     "start": "next start"
   },
   "dependencies": {
