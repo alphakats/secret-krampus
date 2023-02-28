@@ -10,9 +10,20 @@ export const groupRouter = createTRPCRouter({
     }))
     .mutation(async ({ ctx, input }) => {
       try {
-        // TODO: Generate group and store
-        // const group = await ctx.prisma.group.create({ ...  });
-        // Note: return group.id
+        const group = await ctx.prisma.group.create({
+          data: {
+            draws: {
+              create: [
+                {
+                  passphrase: 'sara-loves-christmas',
+                  giver: 'Emma',
+                  receiver: 'Sara',
+                },
+              ],
+            },
+          },
+        });
+        console.log(group);
       } catch (error) {
         console.log(error);
       }
