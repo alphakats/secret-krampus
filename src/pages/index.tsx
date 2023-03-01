@@ -13,9 +13,6 @@ const Home: NextPage = () => {
     postGroup.mutate({ list: userData });
   };
 
-  const getGroup = api.group.getGroup.useQuery({ groupId: "42" });
-  const getDraw = api.draw.getDraw.useQuery({ passphrase: "sara-loves-christmas" });
-
   return (
     <div className="content">
       <ParticipantsForm post={postSecretSanta}/>
