@@ -2,10 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-@import "./topbar.css";
-@import "./homey.css";
+@import "./navbar.css";
 
 
 body {
   @apply bg-neutral-900 text-neutral-100;
 }
+

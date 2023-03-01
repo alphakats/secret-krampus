@@ -1,30 +1,32 @@
 import { Redeem, Settings, Language } from "@mui/icons-material";
+import Link from 'next/link'
 
 type Props = {}
 
-export default function Topbar({}: Props) {
+export default function Navbar({}: Props) {
   return (
-    <div className="topbar">
-      <div className="topbarWrapper">
+    <div className="Navbar">
+      <div className="NavbarWrapper">
           <div className="topLeft">
           </div>
           <div className="topCenter">
-            <span className="logo"> Secret Santa </span>
+            <Link href="/">
+              <span className="logo"> Secret Santa </span>
+            </Link>
           </div>
           <div className="topRight">
-            <div className="topbarIconContainer">
+            <div className="NavbarIconContainer">
               <Redeem />
               <span className="topIconBadge">2</span>
             </div>
-            <div className="topbarIconContainer">
+            <div className="NavbarIconContainer">
               <Language />
             </div>
-            <div className="topbarIconContainer">
+            <div className="NavbarIconContainer">
               <Settings />
             </div>
           </div>
         </div>
-        {/* </div> */}
         </div>
     )
 }

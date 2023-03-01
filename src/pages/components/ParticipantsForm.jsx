@@ -1,6 +1,9 @@
+import Link from 'next/link'
 import { useState } from 'react';
 
+
 export default function ParticipantsForm({post}) {
+
     const nameCount = 4; // default number of name fields
     const [inputFields, setInputFields] = useState(
         Array(nameCount).fill().map((_, i) => ({index: i, name: ''}))
@@ -18,15 +21,15 @@ export default function ParticipantsForm({post}) {
     }
     
     const submit = (e) => {
-        e.preventDefault(); // prevents page refresh
+        // e.preventDefault(); // prevents page refresh
         console.log(inputFields);
         post(inputFields.map(({index, name}) => name))
     }
 
     return (
     <div>
-        <p className='recvField'>
         <div className="App">
+
               <form onSubmit={submit}>
                 {inputFields.map((input, index) => {
                   return (
@@ -42,12 +45,12 @@ export default function ParticipantsForm({post}) {
                 })}
               </form>
             </div>            
-        </p>
         <p className='Buttons'>
             <button onClick={addField}>Add Name</button>
-            <button onClick={submit}>Submit</button>
+            <Link href="/group">
+              <button onClick={submit}>Submit</button>
+            </Link>
         </p>
     </div>
 );
 }
-  

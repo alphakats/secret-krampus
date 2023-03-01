@@ -1,11 +1,11 @@
-.topbar {
+.Navbar {
   width: 100%;
   height: 380px;
   position: sticky;
   top: 0;
   z-index: 999; }
 
-.topbarWrapper {
+.NavbarWrapper {
   background-color: aquamarine;
   height: 100%;
   padding: 0px 20px;
@@ -31,7 +31,7 @@
   display: flex;
   align-items: top; }
 
-.topbarIconContainer {
+.NavbarIconContainer {
   position: relative;
   cursor: pointer;
   color: #555; }
