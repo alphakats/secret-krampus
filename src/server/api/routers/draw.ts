@@ -9,7 +9,7 @@ export const drawRouter = createTRPCRouter({
     }))
     .query(async ({ ctx, input }) => {
       const draw = await ctx.prisma.draw.findUnique({
-        where: { passphrase: 'sara-loves-christmas' }//input.passphrase },
+        where: { passphrase: input.passphrase },
       });
 
       return { reciver: draw.receiver };

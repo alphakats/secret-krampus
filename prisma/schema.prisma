@@ -26,4 +26,3 @@ model Group {
     createdAt DateTime @default(now())
     draws     Draw[]
 }
-

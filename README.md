@@ -20,9 +20,11 @@ Note: To view the database and it's enries run
 ### Run
 `npm install`
 
-`npx prisma db push` or `npm run db:reset`
+`npm run db:migrate`
 
 `npm run dev`
+
+Note: You can easily clean the db with `npm run db:clean`
 
 ## How to run unit tests (using Jest)
 
