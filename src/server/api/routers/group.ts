@@ -18,6 +18,7 @@ export const groupRouter = createTRPCRouter({
       );
 
       try {
+        // TODO: Make sure password is unique before creating
         const group = await ctx.prisma.group.create({
           data: {
             draws: {
