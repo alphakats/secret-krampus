@@ -2,13 +2,9 @@ import { z } from "zod";
 import { TRPCError, initTRPC } from '@trpc/server';
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
+import { randomPassphrase } from '~/server/lib/randomPassphrase';
 import { shuffle } from '~/server/lib/shuffle';
 import type { Draw } from '~/server/lib/shuffle';
-
-// TODO: Replace with sentence generator
-const randomPassphrase: string = () => {
-  return (Math.random() + 1).toString(36).substring(7);
-};
 
 export const groupRouter = createTRPCRouter({
   postGroup: publicProcedure
