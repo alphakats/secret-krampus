@@ -1,7 +1,9 @@
 import { z } from "zod";
+import { TRPCError, initTRPC } from '@trpc/server';
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
-import { TRPCError, initTRPC } from '@trpc/server';
+import { shuffle } from '~/server/lib/shuffle';
+import type { Draw } from '~/server/lib/shuffle';
 
 // TODO: Replace with sentence generator
 const randomPassphrase: string = () => {
@@ -14,17 +16,16 @@ export const groupRouter = createTRPCRouter({
       list: z.array(z.string())
     }))
     .mutation(async ({ ctx, input }) => {
+      const res: Draw = shuffle(input.list);
+      const draws = res.map(
+        v => ({...v, passphrase: randomPassphrase()})
+      );
+
       try {
         const group = await ctx.prisma.group.create({
           data: {
             draws: {
-              create: [
-                {
-                  passphrase: randomPassphrase(),
-                  giver: 'Emma',
-                  receiver: 'Sara',
-                },
-              ],
+              create: draws,
             },
           },
         });
