@@ -1,10 +1,15 @@
 import { z } from "zod";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
+import { TRPCError, initTRPC } from '@trpc/server';
+
+// TODO: Replace with sentence generator
+const randomPassphrase: string = () => {
+  return (Math.random() + 1).toString(36).substring(7);
+};
 
 export const groupRouter = createTRPCRouter({
   postGroup: publicProcedure
-    // Input validation
     .input(z.object({
       list: z.array(z.string())
     }))
@@ -15,7 +20,7 @@ export const groupRouter = createTRPCRouter({
             draws: {
               create: [
                 {
-                  passphrase: 'sara-loves-christmas',
+                  passphrase: randomPassphrase(),
                   giver: 'Emma',
                   receiver: 'Sara',
                 },
@@ -23,24 +28,28 @@ export const groupRouter = createTRPCRouter({
             },
           },
         });
-        console.log(group);
+        return { groupId: group.id }
       } catch (error) {
         console.log(error);
+        // TODO: centeralize error codes
+        throw new TRPCError({
+          code: 'INTERNAL_SERVER_ERROR',
+          message: error,
+        });
       }
-      return { groupId: 42 };
     }),
+
   getGroup: publicProcedure
-    // Input validation
     .input(z.object({
       groupId: z.string()
     }))
-    .query(({ ctx, input }) => {
-      //return ctx.prisma.example.findUnique(input);
-      return { group: [
-        { passphrase: 'sara-loves-christmas', giver: 'Emma'},
-        { passphrase: 'emma-loves-christmas', giver: 'Gina'},
-        { passphrase: 'gina-loves-christmas', giver: 'Sadie'},
-        { passphrase: 'sadie-loves-christmas', giver: 'Sara'},
-      ]}
+    .query(async ({ ctx, input }) => {
+      const group = await ctx.prisma.group.findUnique({
+        where: { id: input.groupId },
+        include: { draws: true },
+      });
+
+      // TODO: Filter out unecessery fields
+      return { group: group.draws };
     }),
 });
