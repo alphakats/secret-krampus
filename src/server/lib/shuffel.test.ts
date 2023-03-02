@@ -1,4 +1,5 @@
-import { shuffle, Draw } from './shuffle';
+import { shuffle } from './shuffle';
+import type { Draw } from './shuffle';
 
 const validateShuffle = (shuffledList: Draw[], originalList:string[]) => {
   const givers = shuffledList.map( x => x.giver);
@@ -8,18 +9,25 @@ const validateShuffle = (shuffledList: Draw[], originalList:string[]) => {
   expect(shuffledList.length).toBe(originalList.length);
 
   // Check: No giver gets themself
-  [...Array(originalList.length)].map((item, i) => expect(shuffledList[i]?.giver).not.toContain(shuffledList[i]?.receiver));
+  Array.from(
+    { length: originalList.length},
+    (item, i) => expect(shuffledList[i]?.giver).not.toContain(shuffledList[i]?.receiver)
+  );
 
   // Check: All values are present
-  [...Array(originalList.length)].map((item, i) => expect(givers).toContain(originalList[i]));
-  [...Array(originalList.length)].map((item, i) => expect(receivers).toContain(originalList[i]));
+  Array.from(
+    { length: originalList.length},
+    (item, i) => expect(givers).toContain(originalList[i])
+  );
+  Array.from(
+    { length: originalList.length},
+    (item, i) => expect(receivers).toContain(originalList[i])
+  );
 }
 
 test('2 people - valid', () => {
   const list = ['Sara', 'Gina'];
   const copyList = ['Sara', 'Gina'];
-  const listLength = list.length;
-
   const shuffledList = shuffle(list);
 
   validateShuffle(shuffledList, copyList);
@@ -28,8 +36,6 @@ test('2 people - valid', () => {
 test('4 people - valid', () => {
   const list = ['Sara', 'Gina', 'Emma', 'Sadie'];
   const copyList = ['Sara', 'Gina', 'Emma', 'Sadie'];
-  const listLength = list.length;
-
   const shuffledList = shuffle(list);
 
   validateShuffle(shuffledList, copyList);
