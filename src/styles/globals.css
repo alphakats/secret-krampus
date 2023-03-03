@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* @import "./navbar.css"; */
+
+
 body {
   @apply bg-neutral-900 text-neutral-100;
 }
