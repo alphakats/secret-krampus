@@ -1,6 +1,6 @@
-import Link from 'next/link'
 import { useState } from 'react';
-
+import Link from 'next/link'
+// import React from 'react'
 
 export default function ParticipantsForm({post}) {
 
@@ -46,11 +46,11 @@ export default function ParticipantsForm({post}) {
               </form>
             </div>            
         <p className='Buttons'>
-            <button onClick={addField}>Add Name</button>
+            <button className='bg-sky-600 hover:bg-sky-700 px-5 py-3 text-white rounded-lg' onClick={addField}>Add Name</button>
             <Link href="/group">
-              <button onClick={submit}>Submit</button>
+              <button className='bg-sky-600 hover:bg-sky-700 px-5 py-3 text-white rounded-lg' onClick={submit}>Submit</button>
             </Link>
         </p>
     </div>
-);
+  );
 }

@@ -7,11 +7,11 @@ import "~/styles/globals.css";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
-    <div className="page">
+    <main className="my-0 mx-auto max-w-3xl text-center">
       <Navbar />
       <Component {...pageProps} />
       <Footer />
-    </div>
+    </main>
     ) 
 
 };

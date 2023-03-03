@@ -14,7 +14,7 @@ const Home: NextPage = () => {
   };
 
   return (
-    <div className="content">
+    <div className="flex align-middle bg-slate-50">
       <ParticipantsForm post={postSecretSanta}/>
     </div>
   )
