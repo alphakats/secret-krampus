@@ -1,9 +1,8 @@
 import { Redeem, Settings, Language } from "@mui/icons-material";
 import Link from 'next/link'
 
-type Props = {}
 
-export default function Navbar({}: Props) {
+export default function Navbar() {
   return (
     <div className="w-full h-40 sticky top-0">
       <div className="bg-emerald-700 min-h-screen flex items-center">

@@ -1,16 +1,25 @@
-import { useState } from 'react';
+import { ChangeEvent, SetStateAction, useState } from 'react';
 import Link from 'next/link'
-// import React from 'react'
 
-export default function ParticipantsForm({post}) {
+
+interface UserInput {
+  index:number;
+  name:string;
+}
+
+type Props = {
+  post: (data : string[]) => void;
+}
+
+export default function ParticipantsForm({post}: Props) {
 
     const nameCount = 4; // default number of name fields
     const [inputFields, setInputFields] = useState(
-        Array(nameCount).fill().map((_, i) => ({index: i, name: ''}))
+        Array(nameCount).fill(null).map((_, i) => ({index: i, name: ''}))
       )
     
-    const handleFormChange = (index, event) => {
-        let data = [...inputFields];
+    const handleFormChange = (index:number, event: ChangeEvent) => {
+        const data: SetStateAction<UserInput[]> = [...inputFields];
         data[index][event.target.name] = event.target.value;
         setInputFields(data);
     }
@@ -20,8 +29,7 @@ export default function ParticipantsForm({post}) {
         setInputFields([...inputFields, newField])
     }
     
-    const submit = (e) => {
-        // e.preventDefault(); // prevents page refresh
+    const submit = () => {
         console.log(inputFields);
         post(inputFields.map(({index, name}) => name))
     }

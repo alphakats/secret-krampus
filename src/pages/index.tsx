@@ -8,8 +8,7 @@ const Home: NextPage = () => {
 
   // API Examples
   const postGroup = api.group.postGroup.useMutation();
-  const postSecretSanta = (userData) => {
-    console.log("Invoke func postSecretSanta .. data: " + userData)
+  const postSecretSanta = (userData : Array<string>) => {
     postGroup.mutate({ list: userData });
   };
 

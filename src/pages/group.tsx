@@ -1,4 +1,6 @@
 import { api } from "~/utils/api";
+import { v4 as uuidv4 } from 'uuid';
+
 
 export default function Group() {
 
@@ -10,7 +12,7 @@ export default function Group() {
     let listItems;
     if (groupData) {
         listItems = groupData.map(group => 
-                <tr>
+                <tr key={uuidv4()}>
                     <th scope="row">Giver</th><td>{group.giver}</td>
                     <th scope="row">Passphrase</th><td>{group.passphrase}</td>
                 </tr>
