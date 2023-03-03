@@ -15,9 +15,7 @@ export const shuffle = (list: string[]): Draw[] => {
 
     do {
         // 2. Shuffle list and assign top
-        /* eslint-disable */
-        list.sort((a, b) => 0.5 - Math.random());
-        /* eslint-enable */
+        list.sort((_a, _b) => 0.5 - Math.random());
         const receiver: string = list.pop()!;
 
         // 3. Store paring

@@ -1,10 +1,16 @@
 import { z } from "zod";
-import { TRPCError, initTRPC } from '@trpc/server';
+import { TRPCError } from '@trpc/server';
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 import { randomPassphrase } from '~/server/lib/randomPassphrase';
 import { shuffle } from '~/server/lib/shuffle';
 import type { Draw } from '~/server/lib/shuffle';
+
+interface DrawEnhanced {
+  giver: string;
+  receiver: string;
+  passphrase: string;
+}
 
 export const groupRouter = createTRPCRouter({
   postGroup: publicProcedure
@@ -12,8 +18,8 @@ export const groupRouter = createTRPCRouter({
       list: z.array(z.string())
     }))
     .mutation(async ({ ctx, input }) => {
-      const res: Draw = shuffle(input.list);
-      const draws = res.map(
+      const res: Draw[] = shuffle(input.list);
+      const draws: DrawEnhanced[] = res.map(
         v => ({...v, passphrase: randomPassphrase()})
       );
 
@@ -26,7 +32,7 @@ export const groupRouter = createTRPCRouter({
             },
           },
         });
-        return { groupId: group.id }
+        return { groupId: group.id };
       } catch (error) {
         console.log(error);
         // TODO: centeralize error codes

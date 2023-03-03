@@ -9,6 +9,9 @@ And (Typescript in 5 minutes)[https://www.typescriptlang.org/docs/handbook/types
 ## How to run locally
 
 ### Setup local postgres db
+
+Make sure you have docker running on your mashine.
+
 `cp .env.test .env`
 
 `docker-compose -f docker-compose.yml up`
