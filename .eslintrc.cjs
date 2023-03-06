@@ -25,5 +25,22 @@ module.exports = {
         fixStyle: "inline-type-imports",
       },
     ],
+    "@typescript-eslint/naming-convention": [ // unsed variable needs leadingUnderscore
+      "error",
+      {
+        "format": ["strictCamelCase"],
+        "selector": "parameter",
+        "modifiers": ["unused"],
+        "leadingUnderscore": "require"
+      }
+    ],
+    "@typescript-eslint/no-unused-vars": [ // allow unused variable
+      "error",
+      {
+        "argsIgnorePattern": "^_",
+        "ignoreRestSiblings": true,
+        "destructuredArrayIgnorePattern": "^_"
+      }
+    ],
   },
 };
