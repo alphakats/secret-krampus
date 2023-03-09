@@ -2,12 +2,12 @@ name: Prisma Migrate
 
 on:
  push:
-  branches: [ci-db]
-#  paths:
-#    - "./prisma/**/*.*"
+  branches: [main]
+  paths:
+    - "./prisma/**/*.*"
 
 jobs:
-  deploy:
+  migrate:
     runs-on: ubuntu-latest 
     environment: production
     
