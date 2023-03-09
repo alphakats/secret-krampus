@@ -3,8 +3,8 @@ name: Prisma Migrate
 on:
  push:
   branches: [ci-db]
-  paths:
-    - "./prisma/**/*.*"
+#  paths:
+#    - "./prisma/**/*.*"
 
 jobs:
   install:
