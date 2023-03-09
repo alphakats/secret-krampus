@@ -12,7 +12,8 @@ jobs:
     
     steps:
       - name: Setup Nodejs
-        uses: actions/setup-node@v2
+        uses: actions/checkout@v3
+        uses: actions/setup-node@v3
         with:
           node-version: 19.x
           cache: "npm"
@@ -26,7 +27,8 @@ jobs:
     
     steps:
       - name: Setup Nodejs
-        uses: actions/setup-node@v2
+        uses: actions/checkout@v3
+        uses: actions/setup-node@v3
         with:
           node-version: 19.x
           cache: "npm"
@@ -43,7 +45,8 @@ jobs:
     
     steps:
       - name: Setup Nodejs
-        uses: actions/setup-node@v2
+        uses: actions/checkout@v3
+        uses: actions/setup-node@v3
         with:
           node-version: 19.x
           cache: "npm"
