@@ -6,12 +6,25 @@ generator client {
 }
 
 datasource db {
-    provider = "sqlite"
-    url      = env("DATABASE_URL")
+    provider  = "postgresql"
+    url       = env("DATABASE_URL_POOLING")
+    directUrl = env("DATABASE_URL")
 }
 
-model Example {
+model Draw {
+    id          String   @id @default(cuid())
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+    // TODO: Hash PW and add index
+    passphrase  String   @unique
+    giver       String
+    receiver    String
+    group       Group @relation(fields: [groupId], references: [id])
+    groupId     String
+}
+
+model Group {
     id        String   @id @default(cuid())
     createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+    draws     Draw[]
 }

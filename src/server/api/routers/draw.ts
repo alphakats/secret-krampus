@@ -4,12 +4,14 @@ import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 
 export const drawRouter = createTRPCRouter({
   getDraw: publicProcedure
-    // Input validation
     .input(z.object({
       passphrase: z.string()
     }))
-    .query(({ ctx, input }) => {
-      //return ctx.prisma.example.findUnique(input);
-      return { reciver: 'Emma' };
+    .query(async ({ ctx, input }) => {
+      const draw = await ctx.prisma.draw.findUnique({
+        where: { passphrase: input.passphrase },
+      });
+
+      return { reciver: draw.receiver };
     }),
 });
