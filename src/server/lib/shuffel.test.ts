@@ -11,17 +11,17 @@ const validateShuffle = (shuffledList: Draw[], originalList:string[]) => {
   // Check: No giver gets themself
   Array.from(
     { length: originalList.length},
-    (item, i) => expect(shuffledList[i]?.giver).not.toContain(shuffledList[i]?.receiver)
+    (_item, i) => expect(shuffledList[i]?.giver).not.toContain(shuffledList[i]?.receiver)
   );
 
   // Check: All values are present
   Array.from(
     { length: originalList.length},
-    (item, i) => expect(givers).toContain(originalList[i])
+    (_item, i) => expect(givers).toContain(originalList[i])
   );
   Array.from(
     { length: originalList.length},
-    (item, i) => expect(receivers).toContain(originalList[i])
+    (_item, i) => expect(receivers).toContain(originalList[i])
   );
 }
 
