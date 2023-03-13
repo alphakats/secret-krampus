@@ -18,6 +18,7 @@ export const groupRouter = createTRPCRouter({
       list: z.array(z.string())
     }))
     .mutation(async ({ ctx, input }) => {
+      console.log(input)
       const res: Draw[] = shuffle(input.list);
       const draws: DrawEnhanced[] = res.map(
         v => ({...v, passphrase: randomPassphrase()})

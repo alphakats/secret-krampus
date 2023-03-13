@@ -12,6 +12,12 @@ export const drawRouter = createTRPCRouter({
         where: { passphrase: input.passphrase },
       });
 
-      return { reciever: draw.receiver };
+    try {
+      return { reciever: draw.reciever };
+    } 
+    catch(e){
+      console.log(e);
+      return { reciever: ''}
+    }
     }),
 });

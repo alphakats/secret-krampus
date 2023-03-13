@@ -10,7 +10,7 @@ const Home: NextPage = () => {
   // API Examples
   const postGroup = api.group.postGroup.useMutation();
   const postSecretSanta = (userData : Array<string>) => {
-    postGroup.mutate({ list: userData });
+    console.log(postGroup.mutate({ list: userData }));
   };
 
   return (

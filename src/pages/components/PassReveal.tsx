@@ -34,7 +34,7 @@ export default function PassReveal() {
       </form>
     </div>
     <div className="p-10 bg-orange-200 rounded-lg">
-      <h1 className="text-2xl">Your Reciever is .... </h1>
+      <h1 className="text-2xl">Your Reciever is .... 🎁</h1>
       <p className="p-10 bg-orange-100 rounded-lg">{getDraw()}</p>
     </div>
     </>
