@@ -5,9 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 export default function Group() {
 
     const getGroup = api.group.getGroup.useQuery({ groupId: "42" });
-    const getDraw = api.draw.getDraw.useQuery({ passphrase: "sara-loves-christmas" });
   
-    console.log(getGroup.data ? getGroup.data.group : 'no data');
     const groupData = getGroup.data ? getGroup.data.group : null;
     let listItems;
     if (groupData) {
@@ -22,7 +20,9 @@ export default function Group() {
         <>
                 <h1>Group</h1>
                 <table>
-                    {listItems}
+                    <tbody>
+                        {listItems}
+                    </tbody>
                 </table>
         </>
     )

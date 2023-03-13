@@ -10,6 +10,6 @@ export const drawRouter = createTRPCRouter({
     }))
     .query(({ ctx, input }) => {
       //return ctx.prisma.example.findUnique(input);
-      return { reciver: 'Emma' };
+      return { reciever: 'Emma the pretty \u2728' };
     }),
 });

@@ -35,14 +35,13 @@ export default function ParticipantsForm({post}: Props) {
     }
 
     return (
-    <div>
-        <div className="App">
-
-              <form onSubmit={submit}>
+        <>
+        <h1 className="text-2xl">Create a new Secret Santa Group</h1>
+              <form className='p-2 m-3' onSubmit={submit}>
                 {inputFields.map((input, index) => {
                   return (
                     <div key={index}>
-                      <input
+                      <input className='border-solid border-slate-200 px-10 py-3 m-1 bg-teal-50  hover:bg-teal-100 rounded-lg'
                         name='name'
                         placeholder='Name'
                         value={input.name}
@@ -52,13 +51,12 @@ export default function ParticipantsForm({post}: Props) {
                   )
                 })}
               </form>
-            </div>            
         <p className='Buttons'>
-            <button className='bg-sky-600 hover:bg-sky-700 px-5 py-3 text-white rounded-lg' onClick={addField}>Add Name</button>
+            <button className='bg-teal-600 hover:bg-teal-700 px-5 py-3 m-2 text-white rounded-lg' onClick={addField}>Add Name</button>
             <Link href="/group">
-              <button className='bg-sky-600 hover:bg-sky-700 px-5 py-3 text-white rounded-lg' onClick={submit}>Submit</button>
+              <button className='bg-teal-600 hover:bg-teal-700 px-5 py-3 m-2 text-white rounded-lg' onClick={submit}>Submit</button>
             </Link>
         </p>
-    </div>
+    </>
   );
 }

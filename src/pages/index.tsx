@@ -3,9 +3,10 @@
 import { type NextPage } from "next";
 import { api } from "~/utils/api";
 import ParticipantsForm from "~/pages/components/ParticipantsForm"
+import PassReveal from "./components/PassReveal";
+
 
 const Home: NextPage = () => {
-
   // API Examples
   const postGroup = api.group.postGroup.useMutation();
   const postSecretSanta = (userData : Array<string>) => {
@@ -13,9 +14,14 @@ const Home: NextPage = () => {
   };
 
   return (
-    <div className="flex align-middle bg-slate-50">
+    <>
+    <div className="font-mono my-5 p-10 block align-middle bg-slate-50 rounded-lg">
       <ParticipantsForm post={postSecretSanta}/>
     </div>
+    <div className="font-mono my-5 p-10 block align-middle bg-slate-50 rounded-lg">
+      <PassReveal />
+    </div>
+    </>
   )
 };
 
