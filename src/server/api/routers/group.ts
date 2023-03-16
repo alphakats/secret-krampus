@@ -12,9 +12,13 @@ interface DrawEnhanced {
   passphrase: string;
 }
 
+interface PostGroupReturn {
+  groupId: string,
+}
+
 const NUMBER_OF_RETRIES = 3;
 
-const retryCreate = (ctx, draws: Draw[], numberOfRetry: number) => {
+const retryCreate = (ctx, draws: Draw[], numberOfRetry: number): Promise<PostGroupReturn> => {
   return new Promise((resolve, reject) => {
 
     const retry = async (n: number) => {
@@ -52,8 +56,10 @@ export const groupRouter = createTRPCRouter({
       const res: Draw[] = shuffle(input.list);
 
       // Retry behavior due to passphrase needing to be unique
-      retryCreate(ctx, res, NUMBER_OF_RETRIES)
-        .then(_x => console.log("Creation complete!"))
+      return retryCreate(ctx, res, NUMBER_OF_RETRIES)
+        .then((res: PostGroupReturn) => {
+          return res;
+        })
         .catch(error => {
           console.log(error);
           // TODO: centeralize error codes
