@@ -8,6 +8,7 @@
     "build": "next build",
     "dev": "next dev",
     "postinstall": "prisma generate",
+    "check-types": "tsc --noemit",
     "lint": "next lint",
     "test": "jest",
     "db:migrate": "npx prisma migrate dev",
