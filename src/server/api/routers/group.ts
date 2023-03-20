@@ -52,9 +52,16 @@ export const groupRouter = createTRPCRouter({
         include: { draws: true },
       });
 
-      // TODO: Filter out unecessery fields
       if (group) {
-        return { group: group.draws };
+        const filtered = group.draws
+          .map(obj => {
+            return {
+              giver: obj['giver'],
+              receiver: obj['receiver'],
+              passphrase: obj['passphrase'],
+            };
+          });
+        return { group: filtered };
       } else {
         throw new TRPCError({
           code: 'NOT_FOUND',
