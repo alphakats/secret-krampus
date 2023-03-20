@@ -2,6 +2,7 @@ import { z } from "zod";
 import { TRPCError } from '@trpc/server';
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
+
 import { randomPassphrase } from '~/server/lib/randomPassphrase';
 import { shuffle } from '~/server/lib/shuffle';
 import type { Draw } from '~/server/lib/shuffle';
@@ -81,6 +82,12 @@ export const groupRouter = createTRPCRouter({
       });
 
       // TODO: Filter out unecessery fields
-      return { group: group.draws };
+      if (group) {
+        return { group: group.draws };
+      } else {
+        throw new TRPCError({
+          code: 'NOT_FOUND',
+        });
+      }
     }),
 });
