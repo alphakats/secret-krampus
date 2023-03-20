@@ -53,8 +53,7 @@ test('Null values filted out', () => {
   expect(shuffle(['Emma', 'Sadie', '']).length).toBe(2);
 });
 
-// TODO: Implement functionallity
-test.skip('Non-unique 2 people is invalid', () => {
-  const list = ['Sara', 'Gina'];
-  expect(shuffle(list).length).toBe(0);
+test('Non-unique entries - valid', () => {
+  const list = ['Sara', 'Gina', 'Sara', 'Gina'];
+  expect(shuffle(list).length).toBe(4);
 });
