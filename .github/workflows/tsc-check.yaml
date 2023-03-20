@@ -1,0 +1,21 @@
+name: Run tsc checks
+
+on: [push, pull_request]
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest 
+    environment: production
+    
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Nodejs
+        uses: actions/setup-node@v3
+        with:
+          node-version: 19.x
+          cache: "npm"
+      - name: Install
+        run: npm install
+
+      - name: Run tsc checks
+        run: npm run check-types
