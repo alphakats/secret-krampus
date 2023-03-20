@@ -46,7 +46,11 @@ test('0 people - no shuffle', () => {
 });
 
 test('1 people - no shuffle', () => {
-  expect(shuffle([]).length).toBe(0);
+  expect(shuffle(['Emma']).length).toBe(0);
+});
+
+test('Null values filted out', () => {
+  expect(shuffle(['Emma', 'Sadie', '']).length).toBe(2);
 });
 
 // TODO: Implement functionallity

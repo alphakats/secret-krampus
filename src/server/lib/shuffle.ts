@@ -4,6 +4,9 @@ export interface Draw {
 }
 
 export const shuffle = (list: string[]): Draw[] => {
+    // 0. Clean list
+    list = list.filter(n => n);
+
     const shuffledList: Draw[] = [];
     if (list.length < 2) {
         return shuffledList;
