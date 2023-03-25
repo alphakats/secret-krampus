@@ -1,5 +1,8 @@
-import { ChangeEvent, SetStateAction, useState } from 'react';
+import { ChangeEvent, SetStateAction, useState, forwardRef } from 'react';
+import { api } from "~/utils/api";
 import Link from 'next/link'
+
+
 
 
 interface UserInput {
@@ -7,11 +10,14 @@ interface UserInput {
   name:string;
 }
 
-type Props = {
-  post: (data : string[]) => void;
-}
 
-export default function ParticipantsForm({post}: Props) {
+export default function ParticipantsForm() {
+
+    // API Examples
+    const postGroup = api.group.postGroup.useMutation();
+    const postSecretSanta = (userData : Array<string>) => {
+      postGroup.mutate({ list: userData });
+    };
 
     const nameCount = 4; // default number of name fields
     const [inputFields, setInputFields] = useState(
@@ -30,9 +36,19 @@ export default function ParticipantsForm({post}: Props) {
     }
     
     const submit = () => {
-        console.log(inputFields);
-        post(inputFields.map(({index, name}) => name))
+        postSecretSanta(inputFields.map(({index, name}) => name))
     }
+
+    const SubmitButton = forwardRef(({ onClick, href }, ref) => {
+      console.log(ref)
+      return (
+        <button className='bg-teal-600 hover:bg-teal-700 px-5 py-3 m-2 text-white rounded-lg' onClick={onClick}>
+          <a href={href} onClick={onClick} ref={ref}>
+            Submit
+          </a>
+        </button>
+)
+    })
 
     return (
         <>
@@ -51,10 +67,10 @@ export default function ParticipantsForm({post}: Props) {
                   )
                 })}
               </form>
-        <p className='Buttons'>
+        <p>
             <button className='bg-teal-600 hover:bg-teal-700 px-5 py-3 m-2 text-white rounded-lg' onClick={addField}>Add Name</button>
-            <Link href="/group">
-              <button className='bg-teal-600 hover:bg-teal-700 px-5 py-3 m-2 text-white rounded-lg' onClick={submit}>Submit</button>
+            <Link href="/group" passHref legacyBehavior>
+              <SubmitButton onClick={submit}>Submit</SubmitButton>
             </Link>
         </p>
     </>

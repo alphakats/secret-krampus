@@ -4,7 +4,10 @@ import { v4 as uuidv4 } from 'uuid';
 
 export default function Group() {
 
-    const getGroup = api.group.getGroup.useQuery({ groupId: "42" });
+    // TODO Error handling
+    // {postGroup.error && <p>Something went wrong! {postGroup.error.message}</p>}
+
+    const getGroup = api.group.getGroup.useQuery({ groupId: "clf8q0tfo001iij144hdovz5h" });
   
     const groupData = getGroup.data ? getGroup.data.group : null;
     let listItems;
