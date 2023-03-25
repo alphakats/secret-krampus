@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { TRPCError } from '@trpc/server';
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 
@@ -12,12 +13,13 @@ export const drawRouter = createTRPCRouter({
         where: { passphrase: input.passphrase },
       });
 
-    try {
-      return { reciever: draw.reciever };
-    } 
-    catch(e){
-      console.log(e);
-      return { reciever: ''}
-    }
+
+      if (draw) {
+        return { reciver: draw.reciever };
+      } else {
+        throw new TRPCError({
+          code: 'NOT_FOUND',
+        });
+      }
     }),
 });

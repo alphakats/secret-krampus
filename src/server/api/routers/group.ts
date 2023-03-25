@@ -39,7 +39,6 @@ export const groupRouter = createTRPCRouter({
         // TODO: centeralize error codes
         throw new TRPCError({
           code: 'INTERNAL_SERVER_ERROR',
-          message: error,
         });
       }
     }),
@@ -55,6 +54,12 @@ export const groupRouter = createTRPCRouter({
       });
 
       // TODO: Filter out unecessery fields
-      return { group: group.draws };
+      if (group) {
+        return { group: group.draws };
+      } else {
+        throw new TRPCError({
+          code: 'NOT_FOUND',
+        });
+      }
     }),
 });

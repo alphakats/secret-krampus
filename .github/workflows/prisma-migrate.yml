@@ -1,0 +1,28 @@
+name: Prisma Migrate
+
+on:
+ push:
+  branches: [main]
+  paths:
+    - "./prisma/**/*.*"
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest 
+    environment: production
+    
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Nodejs
+        uses: actions/setup-node@v3
+        with:
+          node-version: 19.x
+          cache: "npm"
+      - name: Install
+        run: npm install
+
+      - name: Deploy Migrations
+        run: npx prisma migrate deploy
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          DATABASE_URL_POOLING: ${{ secrets.DATABASE_URL_POOLING }}
