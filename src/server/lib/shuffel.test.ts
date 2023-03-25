@@ -1,3 +1,5 @@
+import { expect, test } from 'vitest';
+
 import { shuffle } from './shuffle';
 import type { Draw } from './shuffle';
 
