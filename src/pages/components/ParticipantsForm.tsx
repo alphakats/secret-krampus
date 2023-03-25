@@ -40,7 +40,6 @@ export default function ParticipantsForm() {
     }
 
     const SubmitButton = forwardRef(({ onClick, href }, ref) => {
-      console.log(ref)
       return (
         <button className='bg-teal-600 hover:bg-teal-700 px-5 py-3 m-2 text-white rounded-lg' onClick={onClick}>
           <a href={href} onClick={onClick} ref={ref}>
