@@ -6,7 +6,7 @@ const templates = [
   ' collects {{a_noun}}',
 ];
 
-export const randomPassphrase = (names: string): string => {
+export const randomPassphrase = (names: string[]): string => {
   setTemplates(templates);
 
   const name = names[Math.floor(Math.random() * names.length)];
