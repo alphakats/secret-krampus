@@ -6,25 +6,21 @@ const TEMPLATE_PATH = 'resources/templates.txt';
 
 const myTemplates = (url: string): string[] => {
   const data = readFileSync(join(process.cwd(), url), 'utf8', (err, data) => {
-    if (err) {
-      console.log(err);
-      return err;
-    }
-    return data
-      .split('\n')
-      .filter(n => n)
+    if (err) { return err; }
   });
 
   if (data) {
-    return data;
+    return data
+      .split('\n')
+      .filter(n => n)
   } else {
-    throw 'Error reading file';
+    throw err;
   }
 };
 
 export const randomPassphrase = (names: string[]): string => {
   const templates: string[] = myTemplates(TEMPLATE_PATH);
-  setTemplates([templates]);
+  setTemplates(templates);
 
   const name = names[Math.floor(Math.random() * names.length)];
   const text = name + sentence()

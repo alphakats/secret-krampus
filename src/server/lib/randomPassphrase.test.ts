@@ -5,7 +5,7 @@ import { join } from 'node:path';
 import { randomPassphrase } from './randomPassphrase';
 
 vi.mock('node:fs', () => ({
-  readFileSync: vi.fn().mockImplementation(() => 'test {{noun}}'),
+  readFileSync: vi.fn().mockImplementation(() => ' test {{noun}}\n tjo {{noun}}'),
 }));
 const mockReadFile = vi.mocked(readFileSync);
 
