@@ -18,12 +18,13 @@ export const groupRouter = createTRPCRouter({
       list: z.array(z.string())
     }))
     .mutation(async ({ ctx, input }) => {
-      const res: Draw[] = shuffle(input.list);
-      const draws: DrawEnhanced[] = res.map(
-        v => ({...v, passphrase: randomPassphrase(input.list)})
-      );
 
       try {
+        const res: Draw[] = shuffle(input.list);
+        const draws: DrawEnhanced[] = res.map(
+          v => ({...v, passphrase: randomPassphrase(input.list)})
+        );
+
         // TODO: Make sure password is unique before creating
         const group = await ctx.prisma.group.create({
           data: {
