@@ -2,6 +2,7 @@ import { z } from "zod";
 import { TRPCError } from '@trpc/server';
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
+
 import { randomPassphrase } from '~/server/lib/randomPassphrase';
 import { shuffle } from '~/server/lib/shuffle';
 import type { Draw } from '~/server/lib/shuffle';
@@ -12,34 +13,62 @@ interface DrawEnhanced {
   passphrase: string;
 }
 
+interface PostGroupReturn {
+  groupId: string,
+}
+
+const NUMBER_OF_RETRIES = 3;
+
+const retryCreate = (ctx, draws: Draw[], numberOfRetry: number): Promise<PostGroupReturn> => {
+  return new Promise((resolve, reject) => {
+
+    const retry = async (n: number) => {
+      const enhancedDraws: DrawEnhanced[] = draws.map(
+        v => ({...v, passphrase: randomPassphrase()})
+      );
+
+      try {
+        const group = await ctx.prisma.group.create({
+          data: {
+            draws: {
+              create: enhancedDraws,
+            },
+          },
+        });
+        return resolve({ groupId: group.id });
+      } catch (error) {
+        if (n === 1) {
+          reject(error);
+        } else {
+          return retry(n - 1);
+        }
+      }
+    }
+    return retry(numberOfRetry);
+  });
+}
+
 export const groupRouter = createTRPCRouter({
   postGroup: publicProcedure
     .input(z.object({
       list: z.array(z.string())
     }))
-    .mutation(async ({ ctx, input }) => {
+    .mutation(({ ctx, input }) => {
       const res: Draw[] = shuffle(input.list);
-      const draws: DrawEnhanced[] = res.map(
-        v => ({...v, passphrase: randomPassphrase()})
-      );
 
-      try {
-        // TODO: Make sure password is unique before creating
-        const group = await ctx.prisma.group.create({
-          data: {
-            draws: {
-              create: draws,
-            },
-          },
+      // Retry behavior due to passphrase needing to be unique
+      return retryCreate(ctx, res, NUMBER_OF_RETRIES)
+        .then((res: PostGroupReturn) => {
+          return res;
+        })
+        .catch(error => {
+          console.log(error);
+          // TODO: centeralize error codes
+          throw new TRPCError({
+            code: 'INTERNAL_SERVER_ERROR',
+            message: error,
+          });
         });
-        return { groupId: group.id };
-      } catch (error) {
-        console.log(error);
-        // TODO: centeralize error codes
-        throw new TRPCError({
-          code: 'INTERNAL_SERVER_ERROR',
-        });
-      }
     }),
 
   getGroup: publicProcedure
