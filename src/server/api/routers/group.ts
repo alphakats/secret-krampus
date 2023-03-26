@@ -19,7 +19,7 @@ interface PostGroupReturn {
 
 const NUMBER_OF_RETRIES = 3;
 
-const retryCreate = (ctx, draws: Draw[], numberOfRetry: number): Promise<PostGroupReturn> => {
+const retryCreate = (ctx, draws: Draw[], input: string[], numberOfRetry: number): Promise<PostGroupReturn> => {
   return new Promise((resolve, reject) => {
 
     const retry = async (n: number) => {
@@ -57,7 +57,7 @@ export const groupRouter = createTRPCRouter({
       const res: Draw[] = shuffle(input.list);
 
       // Retry behavior due to passphrase needing to be unique
-      return retryCreate(ctx, res, NUMBER_OF_RETRIES)
+      return retryCreate(ctx, res, input, NUMBER_OF_RETRIES)
         .then((res: PostGroupReturn) => {
           return res;
         })
