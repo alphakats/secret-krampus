@@ -5,9 +5,7 @@ import { join } from 'path';
 const TEMPLATE_FILE = 'resources/templates.txt';
 
 const myFile = (url: string): string[] => {
-  const data = readFileSync(join(process.cwd(), url), 'utf8', (err, data) => {
-    if (err) { return err; }
-  });
+  const data = readFileSync(join(process.cwd(), url), 'utf8');
 
   if (data) {
     return data
