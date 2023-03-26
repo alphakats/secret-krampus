@@ -12,7 +12,7 @@ const myFile = (url: string): string[] => {
       .split('\n')
       .filter(n => n)
   } else {
-    throw err;
+    throw "Can not read file";
   }
 };
 
