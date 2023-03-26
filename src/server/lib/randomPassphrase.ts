@@ -1,9 +1,9 @@
-import { sentence, setTemplates, getTemplates } from 'txtgen';
+import { sentence, setTemplates } from 'txtgen';
 import { readFile } from 'fs';
 
 const TEMPLATE_PATH = 'secretdir/templates.txt';
 
-const getTemplates = (path: string): string => {
+const myTemplates = (path: string): string[] => {
   return readFile(path, 'utf8', (err, data) => {
     if (err) {
       console.error(err);
@@ -17,7 +17,7 @@ const getTemplates = (path: string): string => {
 
 export const randomPassphrase = (names: string[]): string => {
   // TODO: Throw error
-  const templates = getTemplates(TEMPLATE_PATH);
+  const templates: string[] = myTemplates(TEMPLATE_PATH);
   setTemplates(templates);
 
   const name = names[Math.floor(Math.random() * names.length)];
