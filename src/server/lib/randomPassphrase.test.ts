@@ -1,13 +1,18 @@
 import { expect, test, vi } from 'vitest';
-import { readFile } from 'node:fs';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 
 import { randomPassphrase } from './randomPassphrase';
 
 vi.mock('node:fs', () => ({
-  readFile: vi.fn().mockImplementation(() => 'test {{noun}}'),
+  readFileSync: vi.fn().mockImplementation(() => 'test {{noun}}'),
 }));
+const mockReadFile = vi.mocked(readFileSync);
 
-const mockReadFile = vi.mocked(readFile);
+vi.mock('node:path', () => ({
+  join: vi.fn().mockImplementation(() => 'url'),
+}));
+const mockJoin = vi.mocked(join);
 
 test('Check Password content and length', () => {
   const input = 'Gina';

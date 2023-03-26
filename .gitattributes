@@ -1,1 +1,1 @@
-src/server/lib/secretdir/** filter=git-crypt diff=git-crypt
+resources/** filter=git-crypt diff=git-crypt
