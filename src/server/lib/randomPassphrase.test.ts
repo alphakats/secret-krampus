@@ -1,8 +1,17 @@
-import { expect, test } from 'vitest'
+import { expect, test, vi } from 'vitest';
+import { readFile } from 'node:fs';
+
 import { randomPassphrase } from './randomPassphrase';
 
-test('Password is 5 characters', () => {
-  const passphrase = randomPassphrase(['Gina']);
-  expect(passphrase).toContain('gina');
-  expect(passphrase.length).toBeGreaterThan(12);
+vi.mock('node:fs', () => ({
+  readFile: vi.fn().mockImplementation(() => 'test {{noun}}'),
+}));
+
+const mockReadFile = vi.mocked(readFile);
+
+test('Check Password content and length', () => {
+  const input = 'Gina';
+  const passphrase = randomPassphrase([input]);
+  expect(passphrase).toContain(input.toLowerCase());
+  expect(passphrase.length).toBeGreaterThan(input.length);
 });

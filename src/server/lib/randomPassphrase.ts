@@ -1,12 +1,23 @@
 import { sentence, setTemplates, getTemplates } from 'txtgen';
+import { readFile } from 'fs';
 
-const templates = [
-  ' is a {{adjective}} {{noun}}',
-  ' loves {{nouns}}',
-  ' collects {{a_noun}}',
-];
+const TEMPLATE_PATH = 'secretdir/templates.txt';
+
+const getTemplates = (path: string): string => {
+  return readFile(path, 'utf8', (err, data) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    return data
+      .split('\n')
+      .filter(n => n)
+  });
+};
 
 export const randomPassphrase = (names: string[]): string => {
+  // TODO: Throw error
+  const templates = getTemplates(TEMPLATE_PATH);
   setTemplates(templates);
 
   const name = names[Math.floor(Math.random() * names.length)];
