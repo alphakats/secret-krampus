@@ -19,12 +19,12 @@ interface PostGroupReturn {
 
 const NUMBER_OF_RETRIES = 3;
 
-const retryCreate = (ctx, draws: Draw[], names: string[], numberOfRetry: number): Promise<PostGroupReturn> => {
+const retryCreate = (ctx, shuffle: Draw[], names: string[], numberOfRetry: number): Promise<PostGroupReturn> => {
   return new Promise((resolve, reject) => {
 
     const retry = async (n: number) => {
       try {
-        const draws: DrawEnhanced[] = draws.map(
+        const draws: DrawEnhanced[] = shuffle.map(
           v => ({...v, passphrase: randomPassphrase(names)})
         );
 
