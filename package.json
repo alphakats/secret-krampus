@@ -28,6 +28,7 @@
     "@trpc/next": "^10.16.0",
     "@trpc/react-query": "^10.9.0",
     "@trpc/server": "^10.9.0",
+    "bcryptjs": "^2.4.3",
     "next": "13.2.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",

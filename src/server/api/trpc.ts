@@ -83,3 +83,11 @@ export const createTRPCRouter = t.router;
  * are logged in.
  */
 export const publicProcedure = t.procedure;
+
+/**
+ * MANUAL: Adding Middleware
+ */
+
+import * as middleware from "~/server/middleware/encrypt-passphrase-mw.ts";
+
+prisma.$use(middleware.Encrypt);
