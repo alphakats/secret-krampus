@@ -66,7 +66,6 @@ export const groupRouter = createTRPCRouter({
         })
         .catch(error => {
           console.log(error);
-          // TODO: centeralize error codes
           throw new TRPCError({
             code: 'INTERNAL_SERVER_ERROR',
             message: error,
