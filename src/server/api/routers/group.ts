@@ -19,15 +19,15 @@ interface PostGroupReturn {
 
 const NUMBER_OF_RETRIES = 3;
 
-const retryCreate = (ctx, draws: Draw[], numberOfRetry: number): Promise<PostGroupReturn> => {
+const retryCreate = (ctx, draws: Draw[], names: string[], numberOfRetry: number): Promise<PostGroupReturn> => {
   return new Promise((resolve, reject) => {
 
     const retry = async (n: number) => {
-      const enhancedDraws: DrawEnhanced[] = draws.map(
-        v => ({...v, passphrase: randomPassphrase()})
-      );
-
       try {
+        const enhancedDraws: DrawEnhanced[] = draws.map(
+          v => ({...v, passphrase: randomPassphrase(names)})
+        );
+
         const group = await ctx.prisma.group.create({
           data: {
             draws: {
@@ -54,10 +54,13 @@ export const groupRouter = createTRPCRouter({
       list: z.array(z.string())
     }))
     .mutation(({ ctx, input }) => {
+      // clean input
+      input.list = input.list.filter(n => n);
+      
       const res: Draw[] = shuffle(input.list);
 
       // Retry behavior due to passphrase needing to be unique
-      return retryCreate(ctx, res, NUMBER_OF_RETRIES)
+      return retryCreate(ctx, res, input.list, NUMBER_OF_RETRIES)
         .then((res: PostGroupReturn) => {
           return res;
         })
