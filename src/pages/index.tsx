@@ -7,14 +7,10 @@ import PassReveal from "./components/PassReveal";
 
 const Home: NextPage = () => {
   return (
-    <>
-    <div className="font-mono my-5 p-10 block align-middle bg-slate-50 rounded-lg">
-      <ParticipantsForm />
+    <div className="mb-auto">
+        <ParticipantsForm />
+        <PassReveal />
     </div>
-    <div className="font-mono my-5 p-10 block align-middle bg-slate-50 rounded-lg">
-      <PassReveal />
-    </div>
-    </>
   )
 };
 

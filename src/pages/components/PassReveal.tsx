@@ -5,7 +5,7 @@ import { api } from "~/utils/api";
 export default function PassReveal() {
 
   const [passphrase, setPassphrase] = useState('')
-  const getDraw = () => {
+  const revealDraw = () => {
     const draw  = api.draw.getDraw.useQuery({ passphrase })
     return draw.data? draw.data.receiver : ''
   }
@@ -21,22 +21,20 @@ export default function PassReveal() {
     setPassphrase(result.passphrase!);
   }
 
-
   return (
-    <>
-    <div className='border-solid border-slate-200 px-10 py-3 m-1 bg-emerald-50 text-slate-700 rounded-lg'
->
+    <div className="font-mono bg-slate-50 text-slate-700 rounded-lg">
       <h1 className="text-2xl">Already got your passphrase?</h1>
       <form method="post" onSubmit={handleSubmit}>
-        <label className="p-10">
-          Enter Passphrase: <input className="border-solid" name="passphrase" defaultValue="enter passphrasse"/>
-        </label>
+        Enter Passphrase: 
+        <input 
+          className="border-solid bg-slate-200 rounded"
+          name="passphrase"
+          defaultValue="enter passphrasse"/>
       </form>
-    </div>
     <div className="p-10 bg-orange-200 rounded-lg">
       <h1 className="text-2xl">Your receiver is .... 🎁</h1>
-      <p className="p-10 bg-orange-100 rounded-lg">{getDraw()}</p>
+      {/* <p className="p-10 bg-orange-100 rounded-lg">{revealDraw()}</p> */}
     </div>
-    </>
+    </div>
   )
 }
