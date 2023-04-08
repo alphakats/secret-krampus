@@ -15,7 +15,7 @@ export const drawRouter = createTRPCRouter({
 
 
       if (draw) {
-        return { reciver: draw.reciever };
+        return { receiver: draw.receiver };
       } else {
         throw new TRPCError({
           code: 'NOT_FOUND',
