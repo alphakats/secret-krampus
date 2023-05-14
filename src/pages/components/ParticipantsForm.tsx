@@ -32,19 +32,11 @@ export default function ParticipantsForm() {
         setInputFields([...inputFields, newField])
     }
     
-    // ???????????????????????????????????????????????????????????????????????????????//
     const submit = async () => {
       const userData: Array<string> = inputFields.map(({index, name}) => name)
       /** Mutation is the way we send data to our backend */
-      function promiseMutation() {
-        console.log('calling promiseMutation')
-        return new Promise((resolve) => {
-           resolve(postGroup.mutate({ list: userData }))
-        })
-      }
-
-      const res = await promiseMutation();
-      console.log(res)
+      postGroup.mutate({ list: userData })
+      console.log(postGroup.data)
     }
 
     const SubmitButton = forwardRef(({ onClick, href }, ref) => {
@@ -79,19 +71,24 @@ export default function ParticipantsForm() {
               )
             })}
           </form>
-        
+        <div className='justify-center items-center'>
+
           <button 
             className='bg-teal-600 hover:bg-teal-700 px-5 py-3 m-2 text-white rounded-lg'
             onClick={addField}>
               Add Name
           </button>
-
-          {/* <Link href="/group" passHref legacyBehavior> */}
+{/* 
+          <Link href={{
+            pathname: "/group",
+            query: { groupId: postGroup.data?.groupId }
+          }}> */}
             <SubmitButton 
               onClick={submit}>
               Submit
             </SubmitButton>
           {/* </Link> */}
+          </div>
     </div>
   );
 }

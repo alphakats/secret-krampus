@@ -7,7 +7,7 @@ import PassReveal from "./components/PassReveal";
 
 const Home: NextPage = () => {
   return (
-    <div className="mb-auto">
+    <div className="flex flex-col justify-center items-center">
         <ParticipantsForm />
         <PassReveal />
     </div>
