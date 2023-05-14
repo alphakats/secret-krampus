@@ -22,18 +22,17 @@ export default function PassReveal() {
   }
 
   return (
-    <div className="font-mono bg-slate-50 text-slate-700 rounded-lg">
-      <h1 className="text-2xl">Already got your passphrase?</h1>
+    <div >
+      <h1 >Already got your passphrase?</h1>
       <form method="post" onSubmit={handleSubmit}>
         Enter Passphrase: 
         <input 
-          className="border-solid bg-slate-200 rounded"
           name="passphrase"
           defaultValue="enter passphrasse"/>
       </form>
-    <div className="p-10 bg-orange-200 rounded-lg">
-      <h1 className="text-2xl">Your receiver is .... 🎁</h1>
-      {/* <p className="p-10 bg-orange-100 rounded-lg">{revealDraw()}</p> */}
+    <div >
+      <h1 >Your receiver is .... 🎁</h1>
+      {/* <p >{revealDraw()}</p> */}
     </div>
     </div>
   )

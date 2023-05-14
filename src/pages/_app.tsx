@@ -7,7 +7,7 @@ import "~/styles/globals.css";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
-    <main className="flex flex-col h-screen justify-between">
+    <main>
       <Navbar />
       <Component {...pageProps} />
       <Footer />

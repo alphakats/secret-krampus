@@ -33,6 +33,7 @@ export default function ParticipantsForm() {
     }
     
     const submit = async () => {
+      console.log('submit button')
       const userData: Array<string> = inputFields.map(({index, name}) => name)
       /** Mutation is the way we send data to our backend */
       postGroup.mutate({ list: userData })
@@ -42,7 +43,6 @@ export default function ParticipantsForm() {
     const SubmitButton = forwardRef(({ onClick, href }, ref) => {
       return (
         <button 
-          className='bg-teal-600 hover:bg-teal-700 px-5 py-3 m-2 text-white rounded-lg' 
           onClick={onClick}>
           <a 
             href={href} 
@@ -55,13 +55,13 @@ export default function ParticipantsForm() {
     })
 
     return (
-      <div className="font-mono bg-slate-50 rounded-lg">
-        <h1 className="text-2xl">Create a new Secret Santa Group</h1>
-          <form className='p-2 m-3' onSubmit={submit}>
+      <div>
+        <h1 >Create a new Secret Santa Group</h1>
+          <form  onSubmit={submit}>
             {inputFields.map((input, index) => {
               return (
                 <div key={index}>
-                  <input className='border-solid border-slate-200 px-10 py-3 m-1 bg-teal-50  hover:bg-teal-100 rounded-lg'
+                  <input 
                     name='name'
                     placeholder='Name'
                     value={input.name}
@@ -71,10 +71,9 @@ export default function ParticipantsForm() {
               )
             })}
           </form>
-        <div className='justify-center items-center'>
+        <div >
 
           <button 
-            className='bg-teal-600 hover:bg-teal-700 px-5 py-3 m-2 text-white rounded-lg'
             onClick={addField}>
               Add Name
           </button>

@@ -20,8 +20,8 @@ export default function Group() {
         );
     }
     return (
-        <div className=" bg-slate-50 rounded-lg p-10">
-                <h1 className="text-xl">Group</h1>
+        <div>
+                <h1>Group</h1>
                 <table>
                     <tbody>
                         {listItems}
